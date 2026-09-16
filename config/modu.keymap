@@ -41,7 +41,7 @@
 &kp CAPS          &kp A      &kp S             &kp D   &kp F   &kp G   &kp H     &kp J    &kp K      &kp L     &kp SEMI  &kp ENTER
 &kp LSHFT         &kp Z      &kp X             &kp C   &kp V   &kp B   &kp N     &kp M    &kp COMMA  &kp DOT   &kp FSLH  &kp PLUS
 &kp LCTRL         &kp LALT   &kp LEFT_COMMAND  &none   &none   &none   &none     &none    &none      &kp RALT  &kp SQT   &kp MINUS
-&kp LEFT_COMMAND  &kp SPACE  &mo 0                                     &kp BSPC  &kp RET  &mo 0      &kp B
+&kp LEFT_COMMAND  &kp SPACE  &mo 2                                     &kp BSPC  &kp RET  &mo 2      &kp B
             >;
         };
 
@@ -52,7 +52,7 @@
 &kp CAPS          &kp A      &kp S      &kp D   &kp F   &kp G   &kp H     &kp J    &kp K      &kp L     &kp SEMI  &kp ENTER
 &kp LSHFT         &kp Z      &kp X      &kp C   &kp V   &kp B   &kp N     &kp M    &kp COMMA  &kp DOT   &kp FSLH  &kp PLUS
 &kp LCTRL         &kp LALT   &kp LANG1  &none   &none   &none   &none     &none    &none      &kp RALT  &kp SQT   &kp MINUS
-&kp LEFT_COMMAND  &kp SPACE  &mo 0                              &kp BSPC  &kp RET  &mo 0      &kp B
+&kp LEFT_COMMAND  &kp SPACE  &mo 2                              &kp BSPC  &kp RET  &mo 2      &kp B
             >;
         };
 
