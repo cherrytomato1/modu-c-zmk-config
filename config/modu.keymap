@@ -21,6 +21,12 @@
             bindings = <&sys_reset>;
             key-positions = <48 5 6>;
         };
+
+        combo_command_space {
+            timeout-ms = <50>;
+            key-positions = <60 63>;
+            bindings = <&kp LG(SPACE)>;
+        };
     };
 
     keymap {
