@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static consistency checks for the MODU-C Keymap Editor wrapper."""
+"""Static consistency checks for the MODU-C Studio test configuration."""
 
 from __future__ import annotations
 
@@ -113,6 +113,42 @@ def _strip_comments(text: str) -> str:
     return re.sub(r"/\*.*?\*/|//[^\n]*", "", text, flags=re.DOTALL)
 
 
+def check_physical_layout() -> None:
+    """Keep Studio geometry aligned with the existing logical key positions."""
+    text = _strip_comments((ROOT / "config/modu-layouts.dtsi").read_text(encoding="utf-8"))
+    for token in (
+        "#include <physical_layouts.dtsi>",
+        "/delete-property/ zmk,matrix-transform;",
+        "zmk,physical-layout = &modu_layout;",
+        'compatible = "zmk,physical-layout";',
+        "transform = <&default_transform>;",
+        "kscan = <&alt_thumb_kscan>;",
+    ):
+        if token not in text:
+            fail(f"Studio physical layout is missing {token!r}")
+    if re.search(r"zmk,matrix-transform\s*=", text):
+        fail("Studio must not select the legacy chosen matrix transform")
+
+    match = re.search(r"\bkeys\s*=\s*(.*?);", text, re.DOTALL)
+    if not match:
+        fail("Studio physical layout has no keys array")
+    entries = re.findall(r"<&key_physical_attrs\s+([\d\s]+)>", match.group(1))
+    actual = [tuple(map(int, entry.split())) for entry in entries]
+    layout = load_json(ROOT / "config/info.json")["layouts"]["default_transform"]["layout"]
+    expected = [
+        (
+            round(key.get("w", 1) * 100),
+            round(key.get("h", 1) * 100),
+            round(key["x"] * 100),
+            round(key["y"] * 100),
+            0, 0, 0,
+        )
+        for key in layout
+    ]
+    if len(actual) != 67 or actual != expected:
+        fail("Studio keys must match all 67 JSON positions in default_transform order")
+
+
 def _matching_brace(text: str, opening_index: int) -> int:
     depth = 0
     for index in range(opening_index, len(text)):
@@ -165,6 +201,8 @@ def check_keymap() -> None:
         "#include <behaviors.dtsi>",
         "#include <dt-bindings/zmk/keys.h>",
         "#include <dt-bindings/zmk/bt.h>",
+        "#include <dt-bindings/zmk/outputs.h>",
+        '#include "modu-layouts.dtsi"',
     ):
         if include not in text:
             fail(f"config/modu.keymap is missing {include}")
@@ -192,13 +230,39 @@ def check_keymap() -> None:
             f"{PLACEHOLDER_INDICES}; found {none_indices}"
         )
 
+    # Keep the custom Mac/Windows/Fn/service access path usable.
+    if len(layers) < 4 or [name for name, _ in layers[:4]] != [
+        "default_layer", "lower_layer", "fn", "bootloader_layer"
+    ]:
+        fail("Studio requires the existing Mac/Windows/Fn/service layer order")
+
+    def bindings_for(name):
+        node = re.search(rf"\b{name}\s*\{{(.*?)\}};", _strip_comments(text), re.DOTALL)
+        body = re.search(r"\bbindings\s*=\s*<(.*?)>;", node.group(1), re.DOTALL)
+        return [" ".join(binding.split()) for binding in re.findall(r"&[^&]+", body.group(1))]
+
+    for base in ("default_layer", "lower_layer"):
+        bindings = bindings_for(base)
+        if any(bindings[index] != "&mo 2" for index in (62, 65)):
+            fail("Mac and Windows thumb keys must retain access to Fn layer 2")
+    if bindings_for("fn")[48] != "&mo 3":
+        fail("Fn left Ctrl must retain access to service layer 3")
+    service = bindings_for("bootloader_layer")
+    if service[16] != "&studio_unlock" or service[17] != "&out OUT_USB":
+        fail("Fn + Ctrl + R/T must provide Studio unlock/USB output")
+    if any(service[index] != "&bootloader" for index in (5, 6)):
+        fail("service layer 5/6 must preserve both bootloader bindings")
+
 
 def _parse_build_entries(text: str) -> list[dict[str, str]]:
+    # This intentionally checks the repository's small, fixed YAML shape.
+    # Folded CMake arguments may span lines; snippet is optional per half.
     pattern = re.compile(
         r"(?ms)^  - board:\s*(?P<board>\S+)\s*$\n"
         r"^    shield:\s*(?P<shield>\S+)\s*$\n"
+        r"(?:^    snippet:[ \t]*(?P<snippet>\S+)[ \t]*\n)?"
         r"^    cmake-args:\s*>-\s*$\n"
-        r"^      (?P<cmake>[^\n]+)\s*$\n"
+        r"(?P<cmake>(?:^      [^\n]+\n)+)"
         r"^    artifact-name:\s*(?P<artifact>\S+)\s*$"
     )
     return [match.groupdict() for match in pattern.finditer(text)]
@@ -243,14 +307,22 @@ def check_build_files() -> None:
         "${GITHUB_WORKSPACE}/modu-c-firmware/zmk-pmw3610-driver"
     )
     for entry in entries:
+        if not entry["cmake"].lstrip().startswith(f'"{expected_cmake}"'):
+            fail(f"cmake-args for {entry['shield']} must quote the CMake module list")
         try:
             parsed = shlex.split(entry["cmake"])
         except ValueError as exc:
             fail(f"invalid cmake-args quoting for {entry['shield']}: {exc}")
-        if parsed != [expected_cmake]:
+        central = entry["shield"] == "modu_left"
+        expected_args = [expected_cmake] + (["-DCONFIG_ZMK_STUDIO=y"] if central else [])
+        if parsed != expected_args:
             fail(
-                f"cmake-args for {entry['shield']} must be one quoted CMake-list argument"
+                f"cmake-args for {entry['shield']} must preserve the quoted module list "
+                "and enable Studio only on the central"
             )
+        expected_snippet = "studio-rpc-usb-uart" if central else None
+        if entry.get("snippet") != expected_snippet:
+            fail("studio-rpc-usb-uart must be enabled only for modu_left")
 
     west_text = (ROOT / "config/west.yml").read_text(encoding="utf-8")
     zmk = _manifest_project(west_text, "zmk")
@@ -279,6 +351,7 @@ def check_build_files() -> None:
         "fallback_binary: hex",
         "archive_name: modu-c-intermediate",
         "python3 scripts/package_firmware.py",
+        "python3 scripts/test_validate.py",
         "--family 0xADA52840",
         "python3 scripts/verify_uf2.py uf2/modu_left.uf2 uf2/modu_right.uf2",
         "cp LICENSE NOTICE.md THIRD_PARTY_NOTICES.md uf2/",
@@ -330,9 +403,12 @@ def check_build_files() -> None:
 
 def main() -> None:
     check_metadata()
+    check_physical_layout()
     check_keymap()
     check_build_files()
     print("OK: metadata matches the 67-position upstream default_transform.")
+    print("OK: Studio geometry preserves all positions and the alt-thumb scan driver.")
+    print("OK: Studio is enabled only on the central; unlock and output keys are accessible.")
     print("OK: every keymap layer has 67 bindings; default placeholders are at 51..56 only.")
     print("OK: left/right build targets, pinned source revisions, and module paths are exact.")
     print("OK: deterministic HEX normalization, UF2 structural checks, and notices are wired in.")

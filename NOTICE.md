@@ -22,3 +22,11 @@ It is **not** an official EKS Inc. or MODU release.
 - Added static consistency checks, license/notice packaging, and Korean setup documentation.
 
 No trademark rights, patent rights, warranty, or endorsement are provided.
+
+## ZMK Studio integration
+
+Studio build configuration, physical layout, and validation checks are adapted from
+22sh22/modu-c-zmk-config studio-test commit
+5c5a60ace453b11ecf7fab9e1fb70f4483942caa. The custom keymap is retained from
+cherrytomato1/modu-c-zmk-config commit 7677fa5c8e6b65ee6a353d68a5585be82f60fdfa,
+with Studio unlock and USB output on service-layer R/T. Existing licenses apply.
