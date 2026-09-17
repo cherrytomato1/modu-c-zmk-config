@@ -2,9 +2,9 @@
 
 **아래 ZIP 하나를 내려받으면 됩니다.** 새 좌우 펌웨어, 이전 버전 복구 파일, 소스, 안내서가 모두 들어 있습니다.
 
-➡️ **[설치 파일 전체 다운로드 — MODU-C-Studio-8175d9d.zip](https://github.com/cherrytomato1/modu-c-zmk-config/raw/refs/heads/main/windows-studio-guide/MODU-C-Studio-8175d9d.zip)**
+➡️ **[설치 파일 전체 다운로드 — MODU-C-Studio-bd6524c.zip](https://github.com/cherrytomato1/modu-c-zmk-config/raw/refs/heads/main/windows-studio-guide/MODU-C-Studio-bd6524c.zip)**
 
-기존 Mac/Windows/Fn/관리 4개 레이어, Caps 탭·홀드, Command+Space 콤보를 보존한 개인용 Studio 펌웨어입니다. **왼쪽 Command를 먼저 누르고 있다가 오른쪽 엄지 Backspace를 눌러도 Command+Space**가 되도록 추가했습니다. 기준은 기존 Actions #32이며, Studio 버전은 **#35 / 8175d9d**입니다. 빌드와 파일 검증은 끝났고 **실제 기기 설치·Studio 연결은 아직 시험 전**입니다.
+기존 Mac/Windows/Fn/관리 4개 레이어, Caps 탭·홀드, Command+Space 콤보를 보존한 개인용 Studio 펌웨어입니다. **Command 홀드+엄지 Backspace 동작과 레이어2 J/K/L/세미콜론 방향키, Q/W/E/R/T 기호열**이 포함돼 있습니다. 기준은 기존 Actions #32이며, Studio 버전은 **#39 / bd6524c**입니다. 빌드와 파일 검증은 끝났고 **실제 기기 설치·Studio 연결은 아직 시험 전**입니다.
 
 ## 전체 순서
 
@@ -24,11 +24,11 @@
 2. **Microsoft Edge**를 엽니다. Chrome을 이미 쓰고 있다면 Chrome도 됩니다. Git, Python, VS Code 등 개발 도구는 필요 없습니다.
 3. 위 **설치 파일 전체 다운로드** 링크를 누릅니다. 파일 페이지가 열리면 **Download raw file** 다운로드 아이콘을 누릅니다.
 4. 파일 탐색기에서 **다운로드** 폴더를 엽니다.
-5. `MODU-C-Studio-8175d9d.zip`을 오른쪽 클릭 → **모두 압축 풀기** → **압축 풀기**를 누릅니다.
-6. 압축을 푼 안쪽의 `MODU-C-Studio-8175d9d` 폴더를 엽니다. 아래 두 파일이 보이면 준비 완료입니다.
+5. `MODU-C-Studio-bd6524c.zip`을 오른쪽 클릭 → **모두 압축 풀기** → **압축 풀기**를 누릅니다.
+6. 압축을 푼 안쪽의 `MODU-C-Studio-bd6524c` 폴더를 엽니다. 아래 두 파일이 보이면 준비 완료입니다.
 
 ```text
-MODU-C-Studio-8175d9d/
+MODU-C-Studio-bd6524c/
 ├─ README-WINDOWS.txt           이 안내서의 오프라인 사본
 ├─ install-studio/
 │  ├─ modu_left.uf2             왼쪽에 설치할 새 파일
@@ -36,7 +36,7 @@ MODU-C-Studio-8175d9d/
 ├─ backup-7677fa5/
 │  ├─ firmware/                문제가 생기면 돌아갈 기존 좌우 파일
 │  └─ source-7677fa5.zip        기존 소스 보관용
-├─ source-studio-8175d9d.zip     새 소스 보관용
+├─ source-studio-bd6524c.zip     새 소스 보관용
 ├─ BUILD.txt                   빌드 출처
 ├─ VALIDATION.md               검증 결과
 └─ SHA256SUMS.txt               파일 무결성 확인용
@@ -118,13 +118,30 @@ RESET은 키맵 레이어에 의존하지 않습니다. 버튼 위치는 제작�
 
 원하는 키를 바꿀 때도 **편집할 레이어 선택 → 키 위치 선택 → 동작/키 값 선택 → Save → 실제 해당 레이어에서 시험** 순서입니다. 이렇게 저장하는 일반 키 매핑 변경에는 매번 Actions 빌드나 UF2 재설치가 필요 없습니다.
 
+## 레이어 2: 오른손 방향키와 왼손 기호
+
+아래 표의 문자는 **기본 레이어의 물리 키 위치**입니다. 엄지 Fn을 누르고 해당 키를 누릅니다.
+
+| 키 위치 | J | K | L | ; |
+| --- | --- | --- | --- | --- |
+| Fn을 누른 동안 | ← | ↓ | ↑ | → |
+
+| 키 위치 | Q | W | E | R | T |
+| --- | --- | --- | --- | --- | --- |
+| Fn을 누른 동안 | - | = | [ | ] | 작은따옴표(') |
+
+- **Mac 기본 전환: Fn+F**, **Windows 기본 전환: Fn+G**. 예전 Fn+T는 이제 작은따옴표입니다.
+- Home은 **Fn+S**입니다.
+- 원래 H/J/K/L의 마우스 버튼은 **U/I/O/P**로 같은 순서(오른쪽/왼쪽/가운데/오른쪽 클릭)로 이동했습니다. Fn+Y 가운데 클릭, Fn+N 왼쪽 클릭도 유지됩니다.
+- Fn+H와 Fn+D는 아래 기본 레이어의 키를 사용합니다. F12, 숫자패드 기능, 관리 레이어 및 기존 Command+Space 동작은 유지됩니다.
+
 ## 6. 앞으로 자주 쓸 조작
 
 아래 표는 **이번 묶음의 기본 설정** 기준입니다. Studio에서 관련 키를 직접 바꾸면 조작도 달라집니다.
 
 | 원하는 동작 | 실제 키보드에서 누를 키 |
 | --- | --- |
-| Mac 기본 레이어로 전환 | 엄지 Fn을 누른 채 **T**, 이후 모두 떼기 |
+| Mac 기본 레이어로 전환 | 엄지 Fn을 누른 채 **F**, 이후 모두 떼기 |
 | Windows 기본 레이어로 전환 | 엄지 Fn을 누른 채 **G**, 이후 모두 떼기 |
 | Fn 기능 사용 | 엄지 Fn을 누르고 있는 동안 |
 | Caps Lock / Fn | Caps 짧게 누르기 / 200ms 이상 누르고 있기 |
@@ -136,7 +153,7 @@ RESET은 키맵 레이어에 의존하지 않습니다. 버튼 위치는 제작�
 
 오른쪽 엄지 Backspace를 단독으로 누르면 기존 Backspace입니다. Command를 함께 누를 때의 원래 Command+Backspace 동작은 Command+Space로 대체됩니다.
 
-**Fn+T는 Mac 전환**, **Fn+Ctrl+T는 USB 출력 선택**입니다.
+**Fn+F는 Mac 전환**, **Fn+Ctrl+T는 USB 출력 선택**입니다.
 
 Studio 화면에서 아래 설정은 유지하면 관리 기능에 계속 접근할 수 있습니다.
 
@@ -157,7 +174,7 @@ Studio 화면에서 아래 설정은 유지하면 관리 기능에 계속 접근
 | Studio의 USB 장치 목록이 비어 있음 | **왼쪽**에 새 left를 설치했는지, 일반 모드로 부팅됐는지, 데이터 케이블인지 확인. 오른쪽 USB나 부트로더 모드에서는 Studio 편집 불가. |
 | 장치는 보이는데 연결 실패 | Studio를 연 다른 탭/프로그램을 닫고 다시 연결. Fn+Ctrl+T로 USB 출력 선택. Windows 장치 관리자에서 USB 직렬 장치 인식/오류 확인. |
 | 잠금 해제가 안 됨 | 엄지 Fn을 먼저 누른 뒤 왼쪽 Ctrl을 누르고 R. 관리 레이어 접근 키를 바꿨는지 확인. |
-| 바꾼 키가 그대로임 | Save 여부와 **실제 활성 레이어** 확인. Windows는 Fn+G, Mac은 Fn+T. |
+| 바꾼 키가 그대로임 | Save 여부와 **실제 활성 레이어** 확인. Windows는 Fn+G, Mac은 Fn+F. |
 | 새 UF2를 넣어도 예전 Studio 키맵이 보임 | 아래 저장 방식 설명 확인. 필요할 때만 Studio 설정을 기록한 후 Restore Stock Settings 사용. |
 | 오른쪽 입력이 안 됨 | 양쪽 전원, 각 기기에 맞는 새 파일 설치, 좌우 재연결 확인. 정상 복사만으로 실제 연결 성공이 보장되지는 않음. |
 
@@ -174,6 +191,22 @@ Studio 화면에서 아래 설정은 유지하면 관리 기능에 계속 접근
 5. **Save** 후 각 기본 레이어에서 단독 Backspace, Command를 먼저 누르고 Backspace, 기존 동시 입력 콤보를 확인합니다.
 
 처음 Studio를 설치하고 이전 저장 키맵이 없다면 이미 지정되어 있습니다.
+
+### 이미 Studio에 레이어 2를 저장했던 경우
+
+예전 Studio 키맵을 유지하려면 **레이어 2 / fn**에서 아래 위치를 바꾸고 Save합니다. 일반 키는 Behavior **Key Press**, 마우스 버튼은 **Mouse Button Press**, 아래 레이어 통과는 **Transparent**, 기본 전환은 **To Layer**에 해당하는 동작을 선택합니다. 표시 이름은 펌웨어/화면 버전에 따라 다를 수 있습니다.
+
+| 위치 | 새 동작 |
+| --- | --- |
+| Q / W / E / R / T | - / = / [ / ] / 작은따옴표 |
+| J / K / L / ; | ← / ↓ / ↑ / → |
+| U / I / O / P | 오른쪽 / 왼쪽 / 가운데 / 오른쪽 마우스 클릭 |
+| S | Home |
+| F | 레이어 0으로 전환 (to 0) |
+| G | 기존 레이어 1 전환 유지 (to 1) |
+| H / D | Transparent |
+
+전체를 이번 펌웨어 기본값으로 맞추려면 필요한 Studio 변경을 먼저 기록하고 **Restore Stock Settings**를 사용할 수 있습니다. 기존 Studio 편집도 초기화되므로, 다른 변경을 유지하려면 위 표대로 필요한 키만 수정합니다.
 
 ### 저장 방식: GitHub와 Studio는 별개
 
@@ -203,20 +236,22 @@ Studio 화면에서 아래 설정은 유지하면 관리 기능에 계속 접근
 - [ ] 시험 키를 원래 값으로 되돌려 저장했다.
 - [ ] Mac/Windows 전환, Caps 탭·홀드, 기존 Command+Space 콤보를 확인했다.
 - [ ] 오른쪽 엄지 Backspace 단독 입력과 Command를 1초 이상 먼저 누른 뒤 Backspace를 누르는 동작을 각각 확인했다.
+- [ ] Fn+J/K/L/세미콜론의 ←/↓/↑/→, Fn+Q/W/E/R/T의 기호 입력을 확인했다.
+- [ ] Fn+F Mac 전환, Fn+G Windows 전환, Fn+S Home을 확인했다.
 - [ ] 양쪽 키와 트랙볼 이동/버튼, 절전 복귀를 확인했다.
 
-이후 Mac에서 사용하려면 왼쪽 USB 연결 후 Fn+T로 Mac 레이어를 선택합니다. Mac Chrome/Edge에서 Studio 연결도 시도할 수 있습니다. 이전 Mac의 UF2 드라이브 접근 문제와 Studio 직렬 연결은 서로 다른 경로이며, Mac에서의 Studio 연결 성공 여부는 아직 확인하지 않았습니다.
+이후 Mac에서 사용하려면 왼쪽 USB 연결 후 Fn+F로 Mac 레이어를 선택합니다. Mac Chrome/Edge에서 Studio 연결도 시도할 수 있습니다. 이전 Mac의 UF2 드라이브 접근 문제와 Studio 직렬 연결은 서로 다른 경로이며, Mac에서의 Studio 연결 성공 여부는 아직 확인하지 않았습니다.
 
 ## Studio 전환 없이 이번 키 동작만 추가하려면
 
-기존 일반 펌웨어를 계속 사용할 때는 **[일반 펌웨어 #34 다운로드 — MODU-C-Standard-655179f.zip](https://github.com/cherrytomato1/modu-c-zmk-config/raw/refs/heads/main/windows-studio-guide/MODU-C-Standard-655179f.zip)** 를 사용합니다. 압축 안의 README-WINDOWS.txt를 따라 새 left를 **왼쪽**에 설치하면 이번 키맵 변경이 적용됩니다. 이 파일은 Studio 편집을 지원하지 않습니다. **Studio로 전환할 예정이면 맨 위 Studio ZIP으로 아래 절차를 진행합니다.**
+기존 일반 펌웨어를 계속 사용할 때는 **[일반 펌웨어 #38 다운로드 — MODU-C-Standard-2230517.zip](https://github.com/cherrytomato1/modu-c-zmk-config/raw/refs/heads/main/windows-studio-guide/MODU-C-Standard-2230517.zip)** 를 사용합니다. 압축 안의 README-WINDOWS.txt를 따라 새 left를 **왼쪽**에 설치하면 이번 키맵 변경이 적용됩니다. 이 파일은 Studio 편집을 지원하지 않습니다. **Studio로 전환할 예정이면 맨 위 Studio ZIP으로 아래 절차를 진행합니다.**
 
 ## 파일 출처와 검증
 
 이 디렉터리는 특정 빌드의 설치 묶음입니다. 저장소 main의 키맵을 나중에 편집해도 **이 ZIP 내용은 자동 갱신되지 않습니다.** main의 일반 펌웨어에도 Command 홀드 동작을 반영했으며, Studio 구현은 별도 브랜치에 있습니다. Studio로 전환할 때는 이 페이지의 Studio ZIP을 사용합니다.
 
-- [Studio 소스 8175d9d](https://github.com/cherrytomato1/modu-c-zmk-config/tree/8175d9d32edae4dbbe7ce8d2a2ccc691071d9fd7)
-- [새 빌드 Actions #35 — 성공](https://github.com/cherrytomato1/modu-c-zmk-config/actions/runs/35213627868)
+- [Studio 소스 bd6524c](https://github.com/cherrytomato1/modu-c-zmk-config/tree/bd6524cd6ee7a13207ac78498c1da812db46f927)
+- [새 빌드 Actions #39 — 성공](https://github.com/cherrytomato1/modu-c-zmk-config/actions/runs/35220618580)
 - [복귀용 Actions #32 — 성공](https://github.com/cherrytomato1/modu-c-zmk-config/actions/runs/35198359466)
 - [ZIP SHA-256](SHA256SUMS.txt) · [빌드 검증 상세](VALIDATION.md)
 - [제작자 업데이트 공지](https://www.wadiz.io/web/campaign/detailPost/386073/news/611398)
@@ -226,9 +261,9 @@ Actions artifact는 보관 기간이 지나면 만료됩니다. **위에 첨부�
 
 | 새 파일 | SHA-256 |
 | --- | --- |
-| modu_left.uf2 | `c91759078ccbec5dbc6f58e7405f3cd48f2e6ceb457924fe02c069ac5b007cba` |
+| modu_left.uf2 | `e629786db52fecec68af6d8c0dd3159d9067b3bfb8abae8cb8e50c902f20f0c4` |
 | modu_right.uf2 | `2e0ff14833be1f462a80891f8f6b764702b0040879c1096b8cab701d52302b63` |
 
 검증은 빌드·설정·UF2 구조와 해시 기준입니다. 위 완료 체크의 실제 기기 확인은 Windows에서 설치할 때 진행합니다.
 
-이 디렉터리에 남아 있는 MODU-C-Studio-b589c1b.zip은 이전 #33 보관본이며 Command 홀드 동작이 없습니다. 새로 설치할 때는 맨 위 #35 파일을 사용합니다.
+이 디렉터리의 b589c1b / 8175d9d / 655179f 파일은 이전 보관본입니다. 새 배열로 설치할 때는 위의 Studio #39 또는 일반 #38 파일을 사용합니다.
