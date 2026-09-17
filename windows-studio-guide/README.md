@@ -2,9 +2,9 @@
 
 **아래 ZIP 하나를 내려받으면 됩니다.** 새 좌우 펌웨어, 이전 버전 복구 파일, 소스, 안내서가 모두 들어 있습니다.
 
-➡️ **[설치 파일 전체 다운로드 — MODU-C-Studio-bd6524c.zip](https://github.com/cherrytomato1/modu-c-zmk-config/raw/refs/heads/main/windows-studio-guide/MODU-C-Studio-bd6524c.zip)**
+➡️ **[설치 파일 전체 다운로드 — MODU-C-Studio-89681a6.zip](https://github.com/cherrytomato1/modu-c-zmk-config/raw/refs/heads/main/windows-studio-guide/MODU-C-Studio-89681a6.zip)**
 
-기존 Mac/Windows/Fn/관리 4개 레이어, Caps 탭·홀드, Command+Space 콤보를 보존한 개인용 Studio 펌웨어입니다. **Command 홀드+엄지 Backspace 동작과 레이어2 J/K/L/세미콜론 방향키, Q/W/E/R/T 기호열**이 포함돼 있습니다. 기준은 기존 Actions #32이며, Studio 버전은 **#39 / bd6524c**입니다. 빌드와 파일 검증은 끝났고 **실제 기기 설치·Studio 연결은 아직 시험 전**입니다.
+기존 Mac/Windows/Fn/관리 4개 레이어, Caps 탭·홀드, Command+Space 콤보를 보존한 개인용 Studio 펌웨어입니다. **Command 홀드+엄지 Backspace 동작과 레이어2 J/K/L/세미콜론 방향키, Q/W/E/R/T 기호열, 맨 윗줄 F1~F12**가 포함돼 있습니다. 기준은 기존 Actions #32이며, Studio 버전은 **#41 / 89681a6**입니다. 빌드와 파일 검증은 끝났고 **실제 기기 설치·Studio 연결은 아직 시험 전**입니다.
 
 ## 전체 순서
 
@@ -24,11 +24,11 @@
 2. **Microsoft Edge**를 엽니다. Chrome을 이미 쓰고 있다면 Chrome도 됩니다. Git, Python, VS Code 등 개발 도구는 필요 없습니다.
 3. 위 **설치 파일 전체 다운로드** 링크를 누릅니다. 파일 페이지가 열리면 **Download raw file** 다운로드 아이콘을 누릅니다.
 4. 파일 탐색기에서 **다운로드** 폴더를 엽니다.
-5. `MODU-C-Studio-bd6524c.zip`을 오른쪽 클릭 → **모두 압축 풀기** → **압축 풀기**를 누릅니다.
-6. 압축을 푼 안쪽의 `MODU-C-Studio-bd6524c` 폴더를 엽니다. 아래 두 파일이 보이면 준비 완료입니다.
+5. `MODU-C-Studio-89681a6.zip`을 오른쪽 클릭 → **모두 압축 풀기** → **압축 풀기**를 누릅니다.
+6. 압축을 푼 안쪽의 `MODU-C-Studio-89681a6` 폴더를 엽니다. 아래 두 파일이 보이면 준비 완료입니다.
 
 ```text
-MODU-C-Studio-bd6524c/
+MODU-C-Studio-89681a6/
 ├─ README-WINDOWS.txt           이 안내서의 오프라인 사본
 ├─ install-studio/
 │  ├─ modu_left.uf2             왼쪽에 설치할 새 파일
@@ -36,7 +36,7 @@ MODU-C-Studio-bd6524c/
 ├─ backup-7677fa5/
 │  ├─ firmware/                문제가 생기면 돌아갈 기존 좌우 파일
 │  └─ source-7677fa5.zip        기존 소스 보관용
-├─ source-studio-bd6524c.zip     새 소스 보관용
+├─ source-studio-89681a6.zip     새 소스 보관용
 ├─ BUILD.txt                   빌드 출처
 ├─ VALIDATION.md               검증 결과
 └─ SHA256SUMS.txt               파일 무결성 확인용
@@ -118,6 +118,17 @@ RESET은 키맵 레이어에 의존하지 않습니다. 버튼 위치는 제작�
 
 원하는 키를 바꿀 때도 **편집할 레이어 선택 → 키 위치 선택 → 동작/키 값 선택 → Save → 실제 해당 레이어에서 시험** 순서입니다. 이렇게 저장하는 일반 키 매핑 변경에는 매번 Actions 빌드나 UF2 재설치가 필요 없습니다.
 
+## 레이어 2: 맨 윗줄 전체 F1~F12
+
+엄지 Fn을 누르면 맨 윗줄12개가 왼쪽 끝부터 F1~F12로 동작합니다.
+
+| 절반 | 맨 왼쪽부터 순서대로 |
+| --- | --- |
+| 왼쪽 윗줄 | F1 · F2 · F3 · F4 · F5 · F6 |
+| 오른쪽 윗줄 | F7 · F8 · F9 · F10 · F11 · F12 |
+
+물리 Esc 위치는 **Fn을 누른 동안 F1**, Fn을 떼면 원래 Esc입니다. 레이어2 윗줄의 기존 물결표 자리는 F1로 대체됐습니다. 아래쪽 키와 관리 레이어의 부트로더 단축키는 유지됩니다.
+
 ## 레이어 2: 오른손 방향키와 왼손 기호
 
 아래 표의 문자는 **기본 레이어의 물리 키 위치**입니다. 엄지 Fn을 누르고 해당 키를 누릅니다.
@@ -198,6 +209,7 @@ Studio 화면에서 아래 설정은 유지하면 관리 기능에 계속 접근
 
 | 위치 | 새 동작 |
 | --- | --- |
+| 맨 윗줄12개 (왼쪽 끝부터 오른쪽 끝까지) | F1 / F2 / F3 / F4 / F5 / F6 / F7 / F8 / F9 / F10 / F11 / F12 |
 | Q / W / E / R / T | - / = / [ / ] / 작은따옴표 |
 | J / K / L / ; | ← / ↓ / ↑ / → |
 | U / I / O / P | 오른쪽 / 왼쪽 / 가운데 / 오른쪽 마우스 클릭 |
@@ -236,6 +248,7 @@ Studio 화면에서 아래 설정은 유지하면 관리 기능에 계속 접근
 - [ ] 시험 키를 원래 값으로 되돌려 저장했다.
 - [ ] Mac/Windows 전환, Caps 탭·홀드, 기존 Command+Space 콤보를 확인했다.
 - [ ] 오른쪽 엄지 Backspace 단독 입력과 Command를 1초 이상 먼저 누른 뒤 Backspace를 누르는 동작을 각각 확인했다.
+- [ ] Fn을 누르고 맨 윗줄을 눌렀을 때 F1~F12 순서인지 확인했다.
 - [ ] Fn+J/K/L/세미콜론의 ←/↓/↑/→, Fn+Q/W/E/R/T의 기호 입력을 확인했다.
 - [ ] Fn+F Mac 전환, Fn+G Windows 전환, Fn+S Home을 확인했다.
 - [ ] 양쪽 키와 트랙볼 이동/버튼, 절전 복귀를 확인했다.
@@ -244,14 +257,14 @@ Studio 화면에서 아래 설정은 유지하면 관리 기능에 계속 접근
 
 ## Studio 전환 없이 이번 키 동작만 추가하려면
 
-기존 일반 펌웨어를 계속 사용할 때는 **[일반 펌웨어 #38 다운로드 — MODU-C-Standard-2230517.zip](https://github.com/cherrytomato1/modu-c-zmk-config/raw/refs/heads/main/windows-studio-guide/MODU-C-Standard-2230517.zip)** 를 사용합니다. 압축 안의 README-WINDOWS.txt를 따라 새 left를 **왼쪽**에 설치하면 이번 키맵 변경이 적용됩니다. 이 파일은 Studio 편집을 지원하지 않습니다. **Studio로 전환할 예정이면 맨 위 Studio ZIP으로 아래 절차를 진행합니다.**
+기존 일반 펌웨어를 계속 사용할 때는 **[일반 펌웨어 #40 다운로드 — MODU-C-Standard-4203944.zip](https://github.com/cherrytomato1/modu-c-zmk-config/raw/refs/heads/main/windows-studio-guide/MODU-C-Standard-4203944.zip)** 를 사용합니다. 압축 안의 README-WINDOWS.txt를 따라 새 left를 **왼쪽**에 설치하면 이번 키맵 변경이 적용됩니다. 이 파일은 Studio 편집을 지원하지 않습니다. **Studio로 전환할 예정이면 맨 위 Studio ZIP으로 아래 절차를 진행합니다.**
 
 ## 파일 출처와 검증
 
 이 디렉터리는 특정 빌드의 설치 묶음입니다. 저장소 main의 키맵을 나중에 편집해도 **이 ZIP 내용은 자동 갱신되지 않습니다.** main의 일반 펌웨어에도 Command 홀드 동작을 반영했으며, Studio 구현은 별도 브랜치에 있습니다. Studio로 전환할 때는 이 페이지의 Studio ZIP을 사용합니다.
 
-- [Studio 소스 bd6524c](https://github.com/cherrytomato1/modu-c-zmk-config/tree/bd6524cd6ee7a13207ac78498c1da812db46f927)
-- [새 빌드 Actions #39 — 성공](https://github.com/cherrytomato1/modu-c-zmk-config/actions/runs/35220618580)
+- [Studio 소스 89681a6](https://github.com/cherrytomato1/modu-c-zmk-config/tree/89681a619b07190f7dc59185c5de9d3b6ce6f36f)
+- [새 빌드 Actions #41 — 성공](https://github.com/cherrytomato1/modu-c-zmk-config/actions/runs/35221176021)
 - [복귀용 Actions #32 — 성공](https://github.com/cherrytomato1/modu-c-zmk-config/actions/runs/35198359466)
 - [ZIP SHA-256](SHA256SUMS.txt) · [빌드 검증 상세](VALIDATION.md)
 - [제작자 업데이트 공지](https://www.wadiz.io/web/campaign/detailPost/386073/news/611398)
@@ -261,9 +274,9 @@ Actions artifact는 보관 기간이 지나면 만료됩니다. **위에 첨부�
 
 | 새 파일 | SHA-256 |
 | --- | --- |
-| modu_left.uf2 | `e629786db52fecec68af6d8c0dd3159d9067b3bfb8abae8cb8e50c902f20f0c4` |
+| modu_left.uf2 | `a682499afe829b3df86f6215a1206dc9db3f61e0b55e61fba00e22af80fb9bcb` |
 | modu_right.uf2 | `2e0ff14833be1f462a80891f8f6b764702b0040879c1096b8cab701d52302b63` |
 
 검증은 빌드·설정·UF2 구조와 해시 기준입니다. 위 완료 체크의 실제 기기 확인은 Windows에서 설치할 때 진행합니다.
 
-이 디렉터리의 b589c1b / 8175d9d / 655179f 파일은 이전 보관본입니다. 새 배열로 설치할 때는 위의 Studio #39 또는 일반 #38 파일을 사용합니다.
+이 디렉터리의 다른 버전 ZIP은 이전 보관본입니다. 최신 배열로 설치할 때는 위의 Studio #41 또는 일반 #40 파일을 사용합니다.
