@@ -12,7 +12,7 @@
 - 레이어3 숫자5/6의 좌우 부트로더
 - 양쪽 트랙볼, 엄지 방향 보정, ZMK/MODU 소스 고정 버전
 
-추가한 것은 Studio 통신/물리 배치 설정과 레이어3 R/T 두 키입니다.
+Studio 통신/물리 배치 설정과 레이어3 R/T 두 키에 더해, 기본 레이어0/1의 오른쪽 엄지 Backspace에 Command Backspace 동작을 추가했습니다. 단독으로는 Backspace, 왼쪽 Command를 먼저 누른 상태에서는 Command+Space입니다. Command는 유지되며 50ms 동시 입력 제한 없이 동작합니다. 기존 동시 입력 콤보도 유지합니다. 원래 Command+Backspace 동작은 해당 위치에서 대체됩니다.
 
 ## 설치 전 준비
 
@@ -74,3 +74,5 @@ CI/UF2 검증 성공과 실제 장치 동작 검증은 구분합니다. 초기 �
 - 제작자 공지: https://www.wadiz.io/web/campaign/detailPost/386073/news/611398
 - 이식 근거: https://github.com/22sh22/modu-c-zmk-config/tree/5c5a60ace453b11ecf7fab9e1fb70f4483942caa
 - 공식 Studio 설명: https://zmk.dev/docs/features/studio
+
+Studio에 예전 키맵을 이미 저장했다면 새 펌웨어 설치 후 기본 레이어0/1의 오른쪽 엄지 Backspace에 Behavior **Command Backspace**를 선택하고 Save하십시오. 다른 Studio 편집을 유지하면서 이 동작만 적용할 수 있습니다.
